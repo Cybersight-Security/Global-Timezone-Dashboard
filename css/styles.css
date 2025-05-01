@@ -1,0 +1,332 @@
+:root {
+	--display-color: #000000;
+	--bg-color: #000000;
+	--card-bg-color: #000000;
+	--text-color: #ffffff;
+	--border-color: #333;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	font-family: 'Courier New', monospace;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	padding: 1rem;
+	overflow: hidden;
+}
+
+.container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	max-height: calc(100vh - 80px);
+}
+
+/* Local Time Styles */
+.local-time {
+	text-align: center;
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	border: 1px solid var(--border-color);
+}
+
+.local-time h1 {
+	color: var(--display-color);
+	margin-bottom: 0.5rem;
+	font-size: 1.8rem;
+}
+
+.local-time .date {
+	color: var(--text-color);
+	margin-bottom: 1rem;
+	font-size: 1rem;
+}
+
+.local-time .time {
+	transform: scale(1.5);
+	transform-origin: center;
+	margin: 1.5rem 0;
+	display: flex;
+	justify-content: center;
+}
+
+/* Timezone Grid */
+.timezone-wrapper {
+	flex: 1;
+	overflow: auto;
+	padding-right: 5px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--display-color) var(--bg-color);
+}
+
+.timezone-wrapper::-webkit-scrollbar {
+	width: 6px;
+}
+
+.timezone-wrapper::-webkit-scrollbar-track {
+	background: var(--bg-color);
+}
+
+.timezone-wrapper::-webkit-scrollbar-thumb {
+	background-color: var(--display-color);
+	border-radius: 3px;
+}
+
+.timezone-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 1rem;
+	padding-bottom: 1rem;
+}
+
+/* Clock Card Styles */
+.clock {
+	background-color: var(--card-bg-color);
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 0.8rem;
+	text-align: center;
+	transition: transform 0.2s, box-shadow 0.2s;
+	display: flex;
+	flex-direction: column;
+}
+
+.clock-title {
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
+	color: var(--text-color);
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1.2;
+}
+
+.clock-subtitle {
+	font-size: 0.8rem;
+	margin-bottom: 0.5rem;
+	color: var(--display-color);
+	opacity: 0.8;
+}
+
+.date {
+	margin-bottom: 0.5rem;
+	font-size: 0.8rem;
+	color: var(--text-color);
+	opacity: 0.8;
+}
+
+.time {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 3.2rem;
+}
+
+/* Seven-segment Display Styles */
+.digit-container {
+	position: relative;
+	display: inline-block;
+	height: 48px;
+	width: 30px;
+	margin: 0 1px;
+}
+
+.segment {
+	position: absolute;
+	background-color: var(--display-color);
+	opacity: 0.15;
+	border-radius: 2px;
+	transition: opacity 0.2s;
+}
+
+.segment.on {
+	opacity: 1;
+	box-shadow: 0 0 5px var(--display-color);
+}
+
+/* Horizontal segments */
+.segment-a,
+.segment-d,
+.segment-g {
+	height: 5px;
+	width: 24px;
+	left: 3px;
+}
+
+/* Vertical segments */
+.segment-b,
+.segment-c,
+.segment-e,
+.segment-f {
+	width: 5px;
+	height: 18px;
+}
+
+.segment-a {
+	top: 2px;
+}
+
+.segment-b {
+	top: 4px;
+	right: 1px;
+}
+
+.segment-c {
+	bottom: 4px;
+	right: 1px;
+}
+
+.segment-d {
+	bottom: 2px;
+}
+
+.segment-e {
+	bottom: 4px;
+	left: 1px;
+}
+
+.segment-f {
+	top: 4px;
+	left: 1px;
+}
+
+.segment-g {
+	top: 22px;
+}
+
+.colon {
+	display: flex;
+	width: 6px;
+	height: 48px;
+	/* Match height of digit container */
+	align-items: center;
+	justify-content: center;
+	color: var(--display-color);
+	margin: 0 1px;
+	animation: blink 1s infinite;
+	font-size: 24px;
+	line-height: 1;
+}
+
+@keyframes blink {
+
+	0%,
+	49.9% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+/* Controls */
+.controls {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.8rem 0;
+	margin-top: 0.8rem;
+	border-top: 1px solid var(--border-color);
+}
+
+.color-info {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.color-info button {
+	background: none;
+	border: 1px solid var(--border-color);
+	color: var(--display-color);
+	border-radius: 4px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+#color-name {
+	min-width: 80px;
+	text-align: center;
+	color: var(--display-color);
+}
+
+.filter-container {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+#timezone-filter {
+	background-color: rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--border-color);
+	color: var(--text-color);
+	padding: 0.5rem;
+	border-radius: 4px;
+	width: 200px;
+}
+
+.timezone-count {
+	font-size: 0.8rem;
+	color: var(--text-color);
+	opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.timezone-grid {
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	}
+
+	.controls {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.local-time .time {
+		transform: scale(1.2);
+	}
+}
+
+@media (max-width: 480px) {
+	.timezone-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.digit-container {
+		height: 40px;
+		width: 26px;
+	}
+
+	.segment-a,
+	.segment-d,
+	.segment-g {
+		width: 20px;
+	}
+
+	.segment-b,
+	.segment-c,
+	.segment-e,
+	.segment-f {
+		height: 16px;
+	}
+
+	.segment-g {
+		top: 18px;
+	}
+}
