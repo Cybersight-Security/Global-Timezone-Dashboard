@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Timezone Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="local-time" id="local-time">
+        <h1>Loading Local Time...</h1>
+      </div>
+      <div class="timezone-wrapper">
+        <div class="timezone-grid" id="timezone-grid">
+          <!-- Timezones will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="color-info">
+        <button id="prev-color">◀</button>
+        <span id="color-name">Red</span>
+        <button id="next-color">▶</button>
+      </div>
+      <div class="filter-container">
+        <input type="text" id="timezone-filter" placeholder="Filter timezones...">
+        <span class="timezone-count" id="timezone-count"></span>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
